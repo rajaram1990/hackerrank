@@ -1,0 +1,13 @@
+1. Prefer x = x + 1 to x=x+1
+2. Prefer x*x over x * x
+3. Block comments : Each line should start with a # and be not > 72 chars.
+                    New Para should denoted by emply hash line
+4. Doc String is required for all public classes, methods and functions. 
+   Doc Strings not mandatory for non public methods                    
+   For one liner docstrings, close te """ in the same line
+5. Naming Conventions:
+    _single_leading_underscore : Internal Use (weak) indicator. From M import * does not import _ names
+    single_trailing_underscore : used by conventions to avoid conflicts with python kws (eg: str_, class_)
+    __double_leading_underscore : Invokes name mangling, while named as a class attribute
+                                  Inside class FooBar, __boo becomes _FooBar__boo
+    __double_leading_and_trailing_underscore : 
