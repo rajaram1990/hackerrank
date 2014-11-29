@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class Main
+class Main_test
 {
     public static void main(String[] args)
     {
@@ -9,6 +9,9 @@ class Main
     }
     public static void method2() {
         int a =10;
+        Object ab = 10;
         System.out.format("Printing from inside %d",a);
+        System.out.println();
+        System.out.format("Integer %d",(Integer)ab);
     }
 }
