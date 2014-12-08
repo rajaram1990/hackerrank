@@ -123,28 +123,45 @@ class LinkedList
           * It is okay to destroy list b
           * TO pass : The head of the other node b
         */
-        LLNode a = this.get_head();
-        LLNode b = this.get_head();
-        if (a == null || b == null) {
+        LLNode base_ll = this.get_head();
+        LLNode merge_ll = list2.get_head(); // contains ptr of node to be inserted
+        if (merge_ll == null) {
             return;
         }
-        while (a != null && b!= null) {
-            if ((Integer)b.get_data() >= (Integer)a.get_data()) {
-                LLNode temp_next = a.get_next();
-                a.set_next(b);
-                b = b.get_next();
-                a.get_next().set_next(temp_next); // The a.get_next() is the old b
+        else if (base_ll == null) {
+            this.head = merge_ll;
+            return;
+        }
+        LLNode prev_ptr = null; //stores prev ptr of base list
+        while (base_ll != null && merge_ll != null) {
+            if ((Integer)base_ll.get_data() >= (Integer)merge_ll.get_data()) {
+                if (prev_ptr == null) {
+                    // inserting at first position
+                    LLNode temp_next = merge_ll.get_next();
+                    merge_ll.set_next(base_ll);
+                    this.head = merge_ll;
+                    base_ll = merge_ll;
+                    merge_ll = temp_next;
+                }
+                else {
+                    LLNode saved_next = merge_ll.get_next();
+                    prev_ptr.set_next(merge_ll);
+                    merge_ll.set_next(base_ll);
+                    base_ll = merge_ll;
+                    merge_ll = saved_next;
+                }
             }
             else {
-                LLNode saved_b_next = b.get_next();
-                b.set_next(a);
-                a = b;
-                b = saved_b_next;
+                prev_ptr = base_ll;
+                if (base_ll.get_next() == null)
+                    break;
+                base_ll = base_ll.get_next();
             }
         }
-        if (a==null && b!= null) {
-            a.set_next(b);
+        if (base_ll.get_next() == null) {
+            base_ll.set_next(merge_ll);
         }
+        return;
     }
 
     public void front_back_split(LinkedList[] splits) {

@@ -38,6 +38,10 @@ class Main
         list2.add_element(22);
         list2.add_element(29);
         list2.add_element(34);
+        System.out.println("List 1");
+        list1.print_list();
+        System.out.println("List 2");
+        list2.print_list();
         list1.sorted_merge(list2);
         System.out.println("List 1 Sorted Merge");
         list1.print_list();
