@@ -109,6 +109,19 @@ public class LinkedList
         temp_node.set_next(head.get_next());
         head.set_next(temp_node);
     }
+    public LinkedList mergeSort(LinkedList toSort)
+    {
+        if (toSort.head != null && toSort.head.get_next() == null)
+        {
+            return toSort;
+        }
+        LinkedList list2 = new LinkedList(toSort.frontBackSplit());
+        LinkedList list1 = toSort;
+        list1.mergeSort(list1);
+        list1.mergeSort(list2);
+        list1.sortedMerge(list2);
+        return list1;
+    }
     public Node frontBackSplit()
     {
         /** Given a LinkedList (referred to by the object's head), splits
@@ -131,6 +144,46 @@ public class LinkedList
           }
           prev_ptr.set_next(null);
           return slow;
+    }
+    public void insertionSort()
+    {
+        /** Sorts the given list (represented by the current object) by doing
+          * an insertion sort
+          */
+        if (this.head == null)
+            return;
+        Node sortedList = this.head;
+        Node unsorted = this.head.get_next();
+        //Detach the two sublists!
+        sortedList.set_next(null);
+        Node prev_sorted = null;
+        while (unsorted != null)
+        {
+            Node temp_sorted = sortedList;
+            while (temp_sorted != null && unsorted.get_data() > temp_sorted.get_data())
+            {
+                prev_sorted = temp_sorted;
+                temp_sorted = temp_sorted.get_next();
+            }
+            if (prev_sorted == null ) // to insert first element 
+            {
+                Node temp_next = unsorted.get_next();
+                unsorted.set_next(temp_sorted);
+                sortedList = unsorted;
+                unsorted = temp_next; 
+            }
+            else
+            {
+                Node temp_next = unsorted.get_next();
+                unsorted.set_next(temp_sorted);
+                prev_sorted.set_next(unsorted);
+                unsorted = temp_next;
+            }
+            LinkedList temp = new LinkedList(sortedList);
+            temp.printLL();
+            System.out.println("---------");
+       }
+       this.head = sortedList;
     }
     public void sortedMerge(LinkedList toMerge)
     {
