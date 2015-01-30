@@ -22,6 +22,9 @@ public class Main
             bst.reverseSorted();
             BstNode x = bst.searchElement(2);
             System.out.println(x.getData());
+            System.out.println(bst.hasPathSum(11,bst.head));
+            System.out.println("Printing Paths");
+            bst.printPaths();
         }
         catch (Exception ex)
         {

@@ -74,7 +74,6 @@ class anagram:
                         anagram_end_index = occurrence
                         self.anagrams.append([[start_index,end_index],[anagram_start_index,anagram_end_index]])
                         end_index+=1
-
                         break
                     else:
                         continue
@@ -97,4 +96,4 @@ answers = []
         temp_char = test_string[end_index]
         temp_list = 
         start_index+=1
-print anagram_pairs            
+print anagram_pairs

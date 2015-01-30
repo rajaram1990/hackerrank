@@ -1,6 +1,7 @@
+import java.util.ArrayList;
 class BinarySearchTree
 {
-    private BstNode head;
+    public BstNode head;
     public BinarySearchTree(int data)
     {
         this.head = new BstNode(data);
@@ -95,6 +96,33 @@ class BinarySearchTree
         printPreorder(root.getLeft());
         printPreorder(root.getRight());
     }
+    public boolean hasPathSum (int data, BstNode head_ptr)
+    {
+        if (head_ptr == null)
+            return data==0;
+        else
+        {
+            return hasPathSum(data - head_ptr.getData(), head_ptr.getLeft()) || hasPathSum(data - head_ptr.getData(), head_ptr.getRight());
+        }
+    }
+    public void printPaths()
+    {
+        BstNode head_ptr = this.head;
+        ArrayList<Integer> al = new ArrayList<Integer>();
+        printPaths(head_ptr,al);
+    }
+    public void printPaths(BstNode head_ptr, ArrayList<Integer> paths)
+    {
+        ArrayList<Integer> temp_paths = new ArrayList<Integer>(paths);
+        temp_paths.add(head_ptr.getData());
+        if (head_ptr.getLeft() != null)
+            printPaths(head_ptr.getLeft(),temp_paths);
+        if (head_ptr.getRight() != null)
+            printPaths(head_ptr.getRight(),temp_paths);
+        if (head_ptr.getRight() == null && head_ptr.getLeft() == null)
+            System.out.println(temp_paths);
+    }
+
     public BstNode searchElement(int data, BstNode head_ptr) throws Exception
     {
         try
@@ -113,9 +141,5 @@ class BinarySearchTree
             System.out.println("Element not found");
             return null;
         }
-    }
-    public BstNode bfs(int data)
-    {
-        sdf;
     }
 }
